@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">RunFastApp</string>
+    <string name="next">PRÓXIMO</string>
+    <string name="skip">PULAR</string>
+    <string name="start">INICIAR</string>
+
+    <string name="slide_1_title">VAMOS LÁ</string>
+    <string name="slide_1_desc">Junte-se à comunidade que ajuda as pessoas a começar e adquirir o hábito de correr para sempre. </string>
+
+    <string name="slide_2_title">DEFINA METAS</string>
+    <string name="slide_2_desc">E monitore facilmente as atividades que ajudam você a alcançá-las. </string>
+
+    <string name="slide_3_title">COMECE A TREINAR</string>
+    <string name="slide_3_desc">Um plano de corrida ajuda você a progredir ainda mais. </string>
+
+    <string name="slide_4_title">MOTIVE-SE</string>
+    <string name="slide_4_desc">Conecte-se com amigos da corrida e responsabilize-se por meio de desafios compartilhados. </string>
+
+    <string name="facebook_app_id">1930906203906592</string>
+
+</resources>
