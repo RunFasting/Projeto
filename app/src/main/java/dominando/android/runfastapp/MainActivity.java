@@ -1,6 +1,9 @@
 package dominando.android.runfastapp;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,9 +12,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private AccessToken accessToken;
+    private CircleImageView profileImg;
+    private Handler handler = new Handler();
+    private TextView username;
+    private TextView DescEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +55,10 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        username = (TextView)hView.findViewById(R.id.username);
+        DescEmail = (TextView)hView.findViewById(R.id.email);
+        profileImg = (CircleImageView) hView.findViewById(R.id.profile_image);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -86,5 +117,68 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        accessToken = AccessToken.getCurrentAccessToken();
+        if (accessToken == null){
+            finish();
+        }
+
+        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    String nome = object.getString("name");
+                    String email = object.getString("email");
+                    String id = object.getString("id");
+                    String caminhoImg = "https://graph.facebook.com/" +id + "/picture?type=large";
+
+                    username.setText(nome);
+                    DescEmail.setText(email);
+                    loadImg(caminhoImg);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Bundle parametros = new Bundle();
+        parametros.putString("fields", "id,name,email");
+        request.setParameters(parametros);
+        request.executeAsync();
+    }
+
+    private void loadImg(final String caminhoImg){
+
+        new Thread(){
+
+            public void run(){
+                Bitmap img = null;
+
+                try{
+                    URL url = new URL(caminhoImg);
+                    HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                    InputStream input = conexao.getInputStream();
+                    img = BitmapFactory.decodeStream(input);
+                }
+                catch(IOException e){}
+
+                final Bitmap imgAux = img;
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        profileImg.setImageBitmap(imgAux);
+                    }
+                });
+            }
+
+        }.start();
+
     }
 }

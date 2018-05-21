@@ -17,6 +17,7 @@
     <string name="slide_4_desc">Conecte-se com amigos da corrida e responsabilize-se por meio de desafios compartilhados. </string>
 
     <string name="facebook_app_id">1930906203906592</string>
+    <string name="error_facebook">Houve um problema ao autenticar no Facebook. Gostaria de tentar novamente? </string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

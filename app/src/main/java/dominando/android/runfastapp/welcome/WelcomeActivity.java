@@ -1,10 +1,13 @@
 package dominando.android.runfastapp.welcome;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -63,6 +66,25 @@ public class WelcomeActivity extends AppCompatActivity {
 
             @Override
             public void onError(FacebookException error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
+                builder.setMessage(R.string.error_facebook);
+
+                builder.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        loginButton.performClick();
+                    }
+                });
+
+                builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                AlertDialog alerta = builder.create();
+                alerta.show();
 
             }
         });
