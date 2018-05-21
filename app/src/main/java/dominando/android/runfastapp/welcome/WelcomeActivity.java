@@ -1,5 +1,6 @@
 package dominando.android.runfastapp.welcome;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -12,34 +13,38 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
+import dominando.android.runfastapp.MainActivity;
 import dominando.android.runfastapp.R;
 import dominando.android.runfastapp.config.PrefManager;
 
 public class WelcomeActivity extends AppCompatActivity {
     private ViewPager viewPager;
-    //private PrefManager prefManager;
+   // private PrefManager prefManager;
     private LinearLayout dotsLayout;
     private int[] layouts;
     private TextView[] pontos;
     private MyViewPagerAdapter myViewPagerAdapter;
     private LoginButton loginButton;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //prefManager = new PrefManager(this);
-        /*if (!prefManager.isFirstTime()) {
+        /*prefManager = new PrefManager(this);
+        if (!prefManager.isFirstTime()) {
             ChamaTelaPrincipal();
         } */
 
@@ -51,8 +56,25 @@ public class WelcomeActivity extends AppCompatActivity {
         dotsLayout = (LinearLayout) findViewById(R.id.layoutPontos);
         loginButton = (LoginButton) findViewById(R.id.loginButton);
 
-        loginButton.setReadPermissions();
+        loginButton.setReadPermissions(Arrays.asList("public_profile, email, user_friends"));
+        callbackManager = CallbackManager.Factory.create();
 
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                ChamaTelaPrincipal();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
 
         layouts = new int[]{R.layout.welcome_slider1,
                 R.layout.welcome_slider2,
@@ -89,13 +111,28 @@ public class WelcomeActivity extends AppCompatActivity {
         return viewPager.getCurrentItem();
     }
 
-    /*private void ChamaTelaPrincipal() {
-        prefManager.setFirstTime(false);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        if (accessToken != null){
+            ChamaTelaPrincipal();
+        }
+    }
+
+    private void ChamaTelaPrincipal() {
+        //prefManager.setFirstTime(false);
         startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
         finish();
     }
 
-    private void printKeyHash() {
+    /*private void printKeyHash() {
         try {
 
             PackageInfo info = getPackageManager().getPackageInfo("dominando.android.runfastapp", PackageManager.GET_SIGNATURES);
