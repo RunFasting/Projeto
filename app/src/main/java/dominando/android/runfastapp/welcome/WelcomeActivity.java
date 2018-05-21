@@ -1,15 +1,10 @@
 package dominando.android.runfastapp.welcome;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Base64;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,14 +15,10 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import java.lang.reflect.Array;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import dominando.android.runfastapp.MainActivity;
 import dominando.android.runfastapp.R;
-import dominando.android.runfastapp.config.PrefManager;
 
 public class WelcomeActivity extends AppCompatActivity {
     private ViewPager viewPager;

@@ -17,5 +17,11 @@
     <string name="slide_4_desc">Conecte-se com amigos da corrida e responsabilize-se por meio de desafios compartilhados. </string>
 
     <string name="facebook_app_id">1930906203906592</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
