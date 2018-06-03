@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity
         DescEmail = (TextView)hView.findViewById(R.id.email);
         profileImg = (CircleImageView) hView.findViewById(R.id.profile_image);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 
     @Override
@@ -100,11 +101,11 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_iniciar) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_eu) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_metas) {
 
         } else if (id == R.id.nav_manage) {
 
