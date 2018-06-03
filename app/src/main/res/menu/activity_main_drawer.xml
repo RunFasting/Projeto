@@ -17,21 +17,21 @@
             android:icon="@drawable/metas"
             android:title="Metas" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_amigos"
+            android:icon="@drawable/amigos"
+            android:title="Amigos" />
+        <item
+            android:id="@+id/nav_desafios"
+            android:icon="@drawable/desafios"
+            android:title="Desafios" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Ajustes">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_configuracoes"
+                android:icon="@drawable/configuracao"
+                android:title="Configurações" />
         </menu>
     </item>
 
