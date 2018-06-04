@@ -27,9 +27,12 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import javax.net.ssl.HttpsURLConnection;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import dominando.android.runfastapp.amigos.AmigosFragment;
+import dominando.android.runfastapp.desafios.DesafiosFragment;
+import dominando.android.runfastapp.metas.MetasFragment;
+import dominando.android.runfastapp.perfil.PerfilFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,6 +47,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fragmentIniciar();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -71,6 +77,47 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+
+    private void fragmentIniciar(){
+        MainFragment fragment = new MainFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void fragmentPerfil(){
+        PerfilFragment fragment = new PerfilFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void fragmentAmigos(){
+        AmigosFragment fragment = new AmigosFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void fragmentMetas(){
+        MetasFragment fragment = new MetasFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void fragmentsDesafios(){
+        DesafiosFragment fragment = new DesafiosFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -102,15 +149,15 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_iniciar) {
-            // Handle the camera action
+            fragmentIniciar();
         } else if (id == R.id.nav_eu) {
-
+            fragmentPerfil();
         } else if (id == R.id.nav_metas) {
-
+            fragmentMetas();
         } else if (id == R.id.nav_amigos) {
-
+            fragmentAmigos();
         } else if (id == R.id.nav_desafios){
-
+            fragmentsDesafios();
         } else if (id == R.id.nav_configuracoes){
 
         }
