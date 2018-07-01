@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -120,6 +121,12 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
+    private void sair(){
+        LoginManager.getInstance().logOut();
+        finish();
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -160,6 +167,8 @@ public class MainActivity extends AppCompatActivity
             fragmentsDesafios();
         } else if (id == R.id.nav_configuracoes){
 
+        } else if (id == R.id.nav_sair){
+            sair();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

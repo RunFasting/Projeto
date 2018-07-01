@@ -32,6 +32,12 @@
                 android:id="@+id/nav_configuracoes"
                 android:icon="@drawable/configuracao"
                 android:title="Configurações" />
+
+            <item
+                android:id="@+id/nav_sair"
+                android:icon="@drawable/porta"
+                android:title="Sair"/>
+
         </menu>
     </item>
 
